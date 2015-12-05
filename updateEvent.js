@@ -1,7 +1,62 @@
 import jsonfile from 'jsonfile'
 import util from 'util'
+import fs from 'fs'
 
 let allEvents = [];
+
+let categoryName = {
+  1:'音樂',
+  2:'戲劇',
+  3:'舞蹈',
+  4:'親子',
+  5:'獨立音樂',
+  6:'展覽',
+  7:'講座',
+  8:'電影',
+  11:'綜藝',
+  13:'競賽',
+  14:'徵選',
+  15:'其他',
+  17:'演唱會',
+  19:'研習課程',
+  20:'kk售票亭',
+};
+let categoryClass = {
+  1 : 'music',
+  2 : 'drama',
+  3 : 'dance',
+  4 : 'childrens',
+  5 : 'indie',
+  6 : 'exhibition',
+  7 : 'lectures',
+  8 : 'film',
+  11 : 'variety',
+  13: 'contest',
+  14: 'audition',
+  15: 'other',
+  17: 'concert',
+  19: 'learning',
+  20: 'kktix',
+  999: 'dayBlock',
+};
+
+let categoryCount = {
+  1:0,
+  2:0,
+  3:0,
+  4:0,
+  5:0,
+  6:0,
+  7:0,
+  8:0,
+  11:0,
+  13:0,
+  14:0,
+  15:0,
+  17:0,
+  19:0,
+  20:0,
+};
 
 // from http://stackoverflow.com/questions/2848462/count-bytes-in-textarea-using-javascript
 function getUTF8Length(string) {
@@ -33,6 +88,8 @@ function eventTrim(event){
     event.title = event.title.substr(0, event.title.length-2);
   while(getUTF8Length(event.location) > 30)
     event.location = event.location.substr(0, event.location.length-2);
+  while(getUTF8Length(event.performer) > 24)
+    event.performer = event.performer.substr(0, event.performer.length-2);
   return event;
 }
 
@@ -55,17 +112,16 @@ let two_weeks_in_millisecond = one_month_in_millisecond/2;
 let now = new Date(Date.now());
 let oneMonthTimeBound = now.getTime() + one_month_in_millisecond;
 let twoWeeksTimeBound = now.getTime() + two_weeks_in_millisecond;
-let timeBound = twoWeeksTimeBound;
+let timeBound = oneMonthTimeBound;
 
 // kktix
 let file = './src/app/eventData/kktix/events.json';
 let kktixEvents = jsonfile.readFileSync(file).entry;
+let kkCat = 20;
 
 kktixEvents.forEach( event => {
   //time
   let eventTime = new Date(event.published);
-  if(eventTime.getTime() < now.getTime() || eventTime.getTime() > timeBound)
-    return;
 
   let month = eventTime.getMonth()+1;
   let date = eventTime.getDate();
@@ -74,6 +130,10 @@ kktixEvents.forEach( event => {
   let minutes = zeroFilled(eventTime.getMinutes());
   let chDay = `${month}月${date}日(${day})`
   let time = `${hours}:${minutes}`;
+  let performer = event.author.name;
+
+  if(eventTime.getTime() < now.getTime() || eventTime.getTime() > timeBound)
+    return;
 
   //title
   let title = event.title;
@@ -87,6 +147,7 @@ kktixEvents.forEach( event => {
   let isInTaipei = addressInTaipei(address);
 
   if(isInTaipei){
+
     allEvents.push(eventTrim({
       ms:eventTime.getTime(),
       chDay:chDay,
@@ -94,13 +155,17 @@ kktixEvents.forEach( event => {
       title:title,
       location:location,
       //address:address,
+      performer:performer,
       url:url,
-      isIndie:false,
+      category:kkCat,
     }));
+
+    categoryCount[kkCat]++;
   }else{
-    console.log('kktix non taipei address='+address);
+    //console.log('kktix non taipei address='+address);
   }
 });
+
 
 //iCulture
 let iCultureCategoryTypes=[1, 2, 3, 4, 5, 6, 7, 8, 11, 13, 14, 15, 17, 19];
@@ -133,6 +198,10 @@ for(let cat of iCultureCategoryTypes){
       
       let url = event.webSales || event.sourceWebPromote;
 
+      let performer = event.showUnit;
+      if(performer.indexOf('/'))
+        performer = performer.split('/')[0];
+
 
       let isInTaipei = addressInTaipei(address);
 
@@ -145,9 +214,10 @@ for(let cat of iCultureCategoryTypes){
           location:location,
           //address:address,
           url:url,
-          isIndie:cat === 5,
+          category:cat,
+          performer:performer,
         }));
-        console.log(time+' '+title);
+        categoryCount[cat]++;
       }else{
         //console.log('iCulture non taipei address='+address);
       }
@@ -157,11 +227,24 @@ for(let cat of iCultureCategoryTypes){
 
 allEvents.sort((a,b) => a.ms - b.ms);
 
+for(let cat in categoryCount){
+  console.log(categoryName[cat] + ':' + categoryCount[cat]);
+}
 console.log(`${allEvents.length} events in next two weeks converted and sorted`);
 
 let output = './src/app/allEvents.js';
 
-jsonfile.writeFileSync(output, allEvents);
+let allEventsObj = {
+  categoryName:categoryName,
+  categoryCount:categoryCount,
+  categoryClass:categoryClass,
+  allEvents:allEvents,
+};
+
+jsonfile.writeFileSync(output, allEventsObj);
+
+let tmpData = fs.readFileSync(output);
+fs.writeFileSync(output, 'export default ' + tmpData);
 
 // TODO Remove manually edit json to js
 // currently you need to update allEvents.js manually like

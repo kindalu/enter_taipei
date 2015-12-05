@@ -5,7 +5,9 @@
 	padding: 0px;
 	border: 0px;
 }
-
+.event.dayBlock {
+	background-color: rgba(0,0,0,0.3);
+}
 .centerAlign {
 	width: 13em;
 	height:10em;
@@ -33,6 +35,13 @@
   	padding: 0.2em 0 0 0.2em;
   	top: 0;
   	left: 0;
+  	position: absolute;
+}
+
+.performer {
+  	padding: 0.2em 0.2em 0 0;
+  	top: 0;
+  	right: 0;
   	position: absolute;
 }
 
