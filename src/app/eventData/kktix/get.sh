@@ -1,0 +1,1 @@
+wget https://kktix.com/events.json
