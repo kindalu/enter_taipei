@@ -3,6 +3,24 @@ import util from 'util'
 
 let allEvents = [];
 
+// from http://stackoverflow.com/questions/2848462/count-bytes-in-textarea-using-javascript
+function getUTF8Length(string) {
+    var utf8length = 0;
+    for (var n = 0; n < string.length; n++) {
+        var c = string.charCodeAt(n);
+        if (c < 128) {
+            utf8length++;
+        }
+        else if((c > 127) && (c < 2048)) {
+            utf8length = utf8length+2;
+        }
+        else {
+            utf8length = utf8length+3;
+        }
+    }
+    return utf8length;
+ }
+
 function getChDay(day){
   let ch = ['日','ㄧ', '二','三','四','五','六'];
   return ch[day];
@@ -10,13 +28,19 @@ function getChDay(day){
 function zeroFilled(x){
   return ('00' + x).substr(-2);
 }
+function eventTrim(event){
+  while(getUTF8Length(event.title) > 80)
+    event.title = event.title.substr(0, event.title.length-2);
+  while(getUTF8Length(event.location) > 30)
+    event.location = event.location.substr(0, event.location.length-2);
+  return event;
+}
 
 function addressInTaipei(address){
   return (
     typeof address === 'string' && 
     (address.indexOf('臺北市') >= 0 || 
      address.indexOf('台北市') >= 0 ||
-     address.indexOf('新北市') >= 0 ||
      address.indexOf('台北') >= 0 ||
      address.indexOf('台灣大學') >= 0 ||
      address.indexOf('臺灣大學') >= 0 ||
@@ -27,6 +51,7 @@ function addressInTaipei(address){
 
 let one_month_in_millisecond = 2.628e+9;
 let two_weeks_in_millisecond = one_month_in_millisecond/2;
+
 let now = new Date(Date.now());
 let oneMonthTimeBound = now.getTime() + one_month_in_millisecond;
 let twoWeeksTimeBound = now.getTime() + two_weeks_in_millisecond;
@@ -47,7 +72,8 @@ kktixEvents.forEach( event => {
   let day = getChDay(eventTime.getDay());
   let hours = zeroFilled(eventTime.getHours());
   let minutes = zeroFilled(eventTime.getMinutes());
-  let time = `${month}月${date}日(${day})${hours}:${minutes}`;
+  let chDay = `${month}月${date}日(${day})`
+  let time = `${hours}:${minutes}`;
 
   //title
   let title = event.title;
@@ -61,13 +87,16 @@ kktixEvents.forEach( event => {
   let isInTaipei = addressInTaipei(address);
 
   if(isInTaipei){
-    allEvents.push({
+    allEvents.push(eventTrim({
+      ms:eventTime.getTime(),
+      chDay:chDay,
       time:time,
       title:title,
       location:location,
-      address:address,
+      //address:address,
       url:url,
-    });
+      isIndie:false,
+    }));
   }else{
     console.log('kktix non taipei address='+address);
   }
@@ -94,24 +123,30 @@ for(let cat of iCultureCategoryTypes){
       let day = getChDay(eventTime.getDay());
       let hours = zeroFilled(eventTime.getHours());
       let minutes = zeroFilled(eventTime.getMinutes());
-      let time = `${month}月${date}日(${day})${hours}:${minutes}`;
+      let chDay = `${month}月${date}日(${day})`
+      let time = `${hours}:${minutes}`;
 
       let location = info.locationName;
+
       let address = info.location;
       let title = event.title;
+      
       let url = event.webSales || event.sourceWebPromote;
 
 
       let isInTaipei = addressInTaipei(address);
 
       if(isInTaipei){
-        allEvents.push({
+        allEvents.push(eventTrim({
+          ms:eventTime.getTime(),
+          chDay:chDay,
           time:time,
           title:title,
           location:location,
-          address:address,
+          //address:address,
           url:url,
-        });
+          isIndie:cat === 5,
+        }));
         console.log(time+' '+title);
       }else{
         //console.log('iCulture non taipei address='+address);
@@ -120,8 +155,14 @@ for(let cat of iCultureCategoryTypes){
   });
 }
 
-console.log(`${allEvents.length} events in next two weeks converted`);
+allEvents.sort((a,b) => a.ms - b.ms);
 
-let output = './src/app/eventData/allProcessedEvents.json'
+console.log(`${allEvents.length} events in next two weeks converted and sorted`);
+
+let output = './src/app/allEvents.js';
 
 jsonfile.writeFileSync(output, allEvents);
+
+// TODO Remove manually edit json to js
+// currently you need to update allEvents.js manually like
+// export default ...

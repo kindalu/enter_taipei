@@ -1,21 +1,15 @@
-a {
-  color: #ff4081;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 html {
   font-family: 'Roboto', sans-serif;
 }
+
+a {text-decoration:none}
 
 body, h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-body {
-  font-size: 15px;
-  line-height: 24px;
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }

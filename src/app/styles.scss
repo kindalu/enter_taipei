@@ -1,0 +1,55 @@
+.event {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0.5em;
+	padding: 0px;
+	border: 0px;
+}
+
+.centerAlign {
+	width: 13em;
+	height:10em;
+	border: 1px solid rgba(0,0,0,0.3);
+  
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-align-items: center;
+            align-items: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+
+	-webkit-transition: background .2s ease-out, color .2s ease-out;
+    transition: background .2s ease-out, color .2s ease-out;
+    
+    cursor: pointer;
+
+    font-size: 0.8em;
+    color: black;
+
+    position:relative;
+}
+
+.time {
+  	padding: 0.2em 0 0 0.2em;
+  	top: 0;
+  	left: 0;
+  	position: absolute;
+}
+
+.title {
+	padding: 0 1em;
+	position: relative;
+	text-align: left;
+}
+
+.location {
+	padding: 0 0.5em 0.2em 0;
+
+  	right: 0;
+  	bottom: 0;
+  	position: absolute;
+}
+
+.event div.centerAlign:hover {
+	background-color: rgba(255,255,255,0.8);
+} 
