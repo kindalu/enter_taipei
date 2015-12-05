@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack-dev-server.config.js --progress --inline --colors --watch",
+    "updateEvent": "babel-node updateEvent.js",
     "deploy": "NODE_ENV=production webpack -p --config webpack-production.config.js --progress --inline --colors"
   },
   "repository": {
@@ -47,6 +48,7 @@
   "dependencies": {
     "babel-polyfill": "^6.2.0",
     "history": "^1.13.1",
+    "jsonfile": "^2.2.3",
     "normalize.css": "^3.0.3",
     "react": "^0.14.3",
     "react-addons-css-transition-group": "^0.14.3",
