@@ -57,6 +57,15 @@ let categoryCount = {
   19:0,
   20:0,
 };
+let dayClass = {
+  0: 'sun',
+  1: 'mon',
+  2: 'tue',
+  3: 'wed',
+  4: 'thu',
+  5: 'fri',
+  6: 'sat',
+}
 
 // from http://stackoverflow.com/questions/2848462/count-bytes-in-textarea-using-javascript
 function getUTF8Length(string) {
@@ -88,7 +97,7 @@ function eventTrim(event){
     event.title = event.title.substr(0, event.title.length-2);
   while(getUTF8Length(event.location) > 30)
     event.location = event.location.substr(0, event.location.length-2);
-  while(getUTF8Length(event.performer) > 24)
+  while(getUTF8Length(event.performer) > 22)
     event.performer = event.performer.substr(0, event.performer.length-2);
   return event;
 }
@@ -154,6 +163,7 @@ kktixEvents.forEach( event => {
       time:time,
       title:title,
       location:location,
+      dayOfWeek:eventTime.getDay(),
       //address:address,
       performer:performer,
       url:url,
@@ -197,6 +207,8 @@ for(let cat of iCultureCategoryTypes){
       let title = event.title;
       
       let url = event.webSales || event.sourceWebPromote;
+      if(url === '')
+        url = "https://www.google.com.tw/webhp?#q="+event.title;
 
       let performer = event.showUnit;
       if(performer.indexOf('/'))
@@ -212,6 +224,7 @@ for(let cat of iCultureCategoryTypes){
           time:time,
           title:title,
           location:location,
+          dayOfWeek:eventTime.getDay(),
           //address:address,
           url:url,
           category:cat,
@@ -238,6 +251,8 @@ let allEventsObj = {
   categoryName:categoryName,
   categoryCount:categoryCount,
   categoryClass:categoryClass,
+  categoryCount:categoryCount,
+  dayClass:dayClass,
   allEvents:allEvents,
 };
 

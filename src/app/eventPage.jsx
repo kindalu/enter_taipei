@@ -16,41 +16,89 @@ String.prototype.hashCode = function() {
 
 class EventPage extends Component {
 
-  state = {displayFilter:{
+  state = {hideCategory:{
   }}
 
   constructor(props, context){
     super(props, context);
-    for(let cat=0; cat<20; cat++){
-      this.state.displayFilter[cat] = false;
+    for(let cat=0; cat<=20; cat++){
+      this.state.hideCategory[cat] = true;
     }
   }
 
-  render(){
-    let key1=0;
-    let key2=0;
-    let categoryClass = allEventsObj.categoryClass;
+  onCategoryToggle(cat){
+    this.state.hideCategory[cat] = !this.state.hideCategory[cat];
+    this.setState({hideCategory:this.state.hideCategory});
+  }
 
-    //add blocking Date Event
-    let allEvents = allEventsObj.allEvents;
+  render(){
+    const {
+      allEvents, 
+      categoryClass, 
+      categoryName, 
+      categoryCount, 
+      dayClass,
+    } = allEventsObj;
+
+    //apply the filter
+    let eventStaticId = 0;
     let displayEvents = [];
-    let curDateString = ''; 
-    let dayBlockEventCat = 999;
     for(let event of allEvents){
-      //if(this.state.displayFilter[event.category])
-      //  continue;
-      if(event.chDay !== curDateString){
-        let dayBlockEvent = {title:event.chDay, category:dayBlockEventCat, time:'', location:''};
-        displayEvents.push(dayBlockEvent);
-        curDateString = event.chDay;
-      }
+      event.sId = eventStaticId++;
+      if(this.state.hideCategory[event.category])
+        continue;
       displayEvents.push(event);
     }
+    let categories = [];
+    let eventCount = 0;
+    for(let cat in categoryName) {
+      categories.push(cat);
+      eventCount += categoryCount[cat];
+    }
+
+
+
     return ( 
       <div className={styles.allEvents}>
-        {displayEvents.map( event => {
-          return <Event key={key2++} event={event} categoryClass={categoryClass}/>
-        })}  
+
+        {/*Category Buttons*/}
+        <div>
+          { categories.map( cat => {
+              if(categoryCount[cat] === 0)
+                return;
+
+              let enableStyle='';
+              if(!this.state.hideCategory[cat])
+                enableStyle = styles.categoryOn;
+
+              return (
+                <div className={styles.catOuter}>
+                  <div 
+                    key={cat} 
+                    className={styles.category+' '+enableStyle+' '+styles[categoryClass[cat]]}
+                    onClick={e => {
+                      this.onCategoryToggle(cat);
+                    }}>
+                    {categoryName[cat]}({categoryCount[cat]})
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+
+        {/* Events */}
+        <div>
+          {displayEvents.map( event => {
+            return (
+              <Event 
+                key={event.sId} 
+                event={event} 
+                categoryClass={categoryClass}
+                dayClass={dayClass} />
+            );
+          })} 
+        </div> 
       </div>
     );
   }

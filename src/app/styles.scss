@@ -1,12 +1,39 @@
+.catOuter{
+  margin: 0.3em;
+  padding: 0.2em;
+  display: inline-block;
+  vertical-align: middle;
+}
+.catOuter:hover {
+  color: rgba(0,0,0,1);
+  background-color: rgba(255,255,255,0.6);
+}
+
+.category {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.2em;
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.5);
+  color: rgba(0,0,0,0.7);
+}
+
+.categoryOn {
+  color: rgba(0,0,0,0.8);
+  border: 1px solid rgba(0,0,0,0.3);  
+}
+
+.category:hover {
+  color: rgba(0,0,0,0.87);
+  background-color: rgba(255,255,255,0.7);
+}
+
 .event {
 	display: inline-block;
 	vertical-align: middle;
-	margin: 0.5em;
+	margin: 0.7em;
 	padding: 0px;
 	border: 0px;
-}
-.event.dayBlock {
-	background-color: rgba(0,0,0,0.3);
 }
 .centerAlign {
 	width: 13em;
@@ -25,28 +52,29 @@
     
     cursor: pointer;
 
-    font-size: 0.8em;
+    font-size: 1em;
     color: black;
 
     position:relative;
 }
 
 .time {
-  	padding: 0.2em 0 0 0.2em;
+  	margin: 0.2em 0em 0em 0.5em;
   	top: 0;
   	left: 0;
   	position: absolute;
 }
 
 .performer {
-  	padding: 0.2em 0.2em 0 0;
-  	top: 0;
+  	padding: 0 0.5em 1.6em 0;
+  	bottom: 0;
   	right: 0;
   	position: absolute;
 }
 
 .title {
-	padding: 0 1em;
+	margin: 0 0.9em;
+  padding: 0.1em;
 	position: relative;
 	text-align: left;
 }
@@ -54,11 +82,118 @@
 .location {
 	padding: 0 0.5em 0.2em 0;
 
-  	right: 0;
-  	bottom: 0;
-  	position: absolute;
+  right: 0;
+  bottom: 0;
+  position: absolute;
 }
 
-.event div.centerAlign:hover {
-	background-color: rgba(255,255,255,0.8);
+.event div.centerAlign:hover{
+	background-color: rgba(255,255,255,0.7);
 } 
+
+/*
+  1 : 'music',
+  2 : 'drama',
+  3 : 'dance',
+  4 : 'childrens',
+  5 : 'indie',
+  6 : 'exhibition',
+  7 : 'lectures',
+  8 : 'film',
+  11 : 'variety',
+  13: 'contest',
+  14: 'audition',
+  15: 'other',
+  17: 'concert',
+  19: 'learning',
+  20: 'kktix',
+  999: 'dayBlock',
+*/
+// color from d3 category20 without the gray scale one
+// https://github.com/mbostock/d3/wiki/Ordinal-Scales
+.music.categoryOn,
+.music.event {
+  background-color: #1f77b4;
+}
+.drama.categoryOn,
+.drama.event {
+  background-color: #ff7f0e;
+}
+.dance.categoryOn,
+.dance.event {
+  background-color: #9467bd;
+}
+.childrens.categoryOn,
+.childrens.event {
+  background-color: #8c564b;
+}
+.indie.categoryOn,
+.indie.event {
+  background-color: #d62728;
+}
+.exhibition.categoryOn,
+.exhibition.event {
+  background-color:  #e377c2;
+}
+.lectures.categoryOn,
+.lectures.event {
+  background-color: #7f7f7f;
+}
+.film.categoryOn,
+.film.event {
+  background-color: #bcbd22;
+}
+.variety.categoryOn,
+.variety.event {
+  background-color: #17becf;
+}
+.contest.categoryOn,
+.contest.event {
+  background-color: #aec7e8;
+}
+.audition.categoryOn,
+.audition.event {
+  background-color: #c49c94;
+}
+.other.categoryOn,
+.other.event {
+  background-color: #98df8a;
+}
+.concert.categoryOn,
+.concert.event {
+  background-color: #ffbb78;
+}
+.learning.categoryOn,
+.learning.event {
+  background-color: #f7b6d2;
+}
+.kktix.categoryOn,
+.kktix.event {
+  background-color: #2ca02c;
+}
+
+//using d3 category20 color
+/*
+.mon .time {
+  border-bottom: 2px solid #aec7e8;
+}
+.tue .time{
+  border-bottom: 2px solid #ffbb78;
+}
+.wed .time{
+  border-bottom: 2px solid #98df8a;
+}
+.thu .time{
+  border-bottom: 2px solid #ff9896;
+}
+.fri .time{
+  border-bottom: 2px solid #c5b0d5;
+}
+.sat .time{
+  border-bottom: 2px solid #c49c94;
+}
+.sun .time{
+  border-bottom: 2px solid #dbdb8d;
+}
+*/
+
