@@ -1,0 +1,7 @@
+node_modules
+build
+npm-debug.log
+firebase.json
+*.json
+src/app/allEvents.js
+public
