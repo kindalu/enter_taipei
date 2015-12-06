@@ -6,7 +6,7 @@ A Project for Hackthon.Taipei 2015
 懷念以前無聊時就會去戳戳樂 --- 看看有什麼新的獨立樂團表演。(ps: [新的介面](http://www.ticket.com.tw/infor/ibon/ibon07.jpg)把時間拿掉了)
 
 
-執行方法：
+#執行方法：
 
 npm install
 
