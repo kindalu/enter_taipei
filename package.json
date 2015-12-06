@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack-dev-server.config.js --progress --inline --colors --watch",
     "updateEvent": "babel-node updateEvent.js",
-    "deploy": "NODE_ENV=production webpack -p --config webpack-production.config.js --progress --inline --colors"
+    "deploy": "NODE_ENV=production webpack -p --config webpack-production.config.js --progress --inline --colors",
+    "updateAndDeployToFirebase": "sh updateAndDeployToFirebase.sh"
   },
   "repository": {
     "type": "git",
