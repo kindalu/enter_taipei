@@ -62,7 +62,7 @@ class EventPage extends Component {
 
         {/*Header*/}
         <div>
-          <a href='https://github.com/kindalu/enter_taipei'>
+          <a href='https://github.com/kindalu/enter_taipei' target="_blank">
             <div className={styles.pageTitle}>
               Enter Taipei：{eventCount} events for you to enter.
             </div>  

@@ -14,7 +14,7 @@ class Event extends Component {
   render(){
     const {event, categoryClass, dayClass} = this.props;
     return (
-      <a href={event.url}>
+      <a href={event.url} target="_blank" >
         <div className={styles.event + ' ' + styles[categoryClass[event.category]] + ' ' + styles[dayClass[event.dayOfWeek]]}>
           <div className={styles.centerAlign}>
             <span className={styles.time}>{event.chDay+' '+event.time}</span>
