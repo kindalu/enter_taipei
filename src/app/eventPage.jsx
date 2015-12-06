@@ -57,34 +57,41 @@ class EventPage extends Component {
     }
 
 
-
     return ( 
       <div className={styles.allEvents}>
 
-        {/*Category Buttons*/}
+        {/*Header*/}
         <div>
-          { categories.map( cat => {
-              if(categoryCount[cat] === 0)
-                return;
+          <a href='https://github.com/kindalu/enter_taipei'>
+            <div className={styles.pageTitle}>
+              Enter Taipei：{eventCount} events for you to enter.
+            </div>  
+          </a>
+          {/*Category Buttons*/}
+          <div className={styles.allCategories}>
+            { categories.map( cat => {
+                if(categoryCount[cat] === 0)
+                  return;
 
-              let enableStyle='';
-              if(!this.state.hideCategory[cat])
-                enableStyle = styles.categoryOn;
+                let enableStyle='';
+                if(!this.state.hideCategory[cat])
+                  enableStyle = styles.categoryOn;
 
-              return (
-                <div className={styles.catOuter}>
-                  <div 
-                    key={cat} 
-                    className={styles.category+' '+enableStyle+' '+styles[categoryClass[cat]]}
-                    onClick={e => {
-                      this.onCategoryToggle(cat);
-                    }}>
-                    {categoryName[cat]}({categoryCount[cat]})
+                return (
+                  <div className={styles.catOuter}>
+                    <div 
+                      key={cat} 
+                      className={styles.category+' '+enableStyle+' '+styles[categoryClass[cat]]}
+                      onClick={e => {
+                        this.onCategoryToggle(cat);
+                      }}>
+                      {categoryName[cat]}({categoryCount[cat]})
+                    </div>
                   </div>
-                </div>
-              );
-            })
-          }
+                );
+              })
+            }
+          </div>
         </div>
 
         {/* Events */}

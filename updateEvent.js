@@ -93,7 +93,7 @@ function zeroFilled(x){
   return ('00' + x).substr(-2);
 }
 function eventTrim(event){
-  while(getUTF8Length(event.title) > 80)
+  while(getUTF8Length(event.title) > 90)
     event.title = event.title.substr(0, event.title.length-2);
   while(getUTF8Length(event.location) > 30)
     event.location = event.location.substr(0, event.location.length-2);
