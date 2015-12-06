@@ -9,7 +9,7 @@ A Project for Hackthon.Taipei 2015
 
 npm install
 
-npm run updateAndDeployToFirebase (會包成靜態檔案到 /public folder 下，然後放到 Firebase CDN 去 :p)
+npm run updateAndDeployToFirebase (抓最新活動、編檔案到 /public 下，然後 deploy 到 Firebase CDN 去 :p)
 
 npm run dev (for 開發測試)
 ---
