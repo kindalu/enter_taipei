@@ -14,9 +14,9 @@ npm install
 
 到專案目錄下跑 npm run updateEvent (會整理格式、抓台北市一個月內的活動)
 
-npm run dev (local 測試) or
+npm run dev (for 開發測試) or
 
-npm run deploy (包成靜態檔案到 /public folder 下，然後放到 CDN 去:p)
+npm run updateAndDeployToFirebase (會包成靜態檔案到 /public folder 下，然後放到 Firebase CDN 去 :p)
 
 ---
 活動來源是：KKTIX API、文化部 iCulture API (年代、寬宏、兩廳院、iNDIEVOX、Legacy、河岸留言、台北市文化快遞 等)。
