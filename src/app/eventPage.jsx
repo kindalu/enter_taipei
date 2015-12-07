@@ -78,9 +78,8 @@ class EventPage extends Component {
                   enableStyle = styles.categoryOn;
 
                 return (
-                  <div className={styles.catOuter}>
+                  <div key={cat} className={styles.catOuter}>
                     <div 
-                      key={cat} 
                       className={styles.category+' '+enableStyle+' '+styles[categoryClass[cat]]}
                       onClick={e => {
                         this.onCategoryToggle(cat);
