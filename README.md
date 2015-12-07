@@ -9,8 +9,11 @@ A Project for Hackthon.Taipei 2015
 
 npm install
 
-npm run updateAndDeployToFirebase (抓最新活動、編檔案到 /public 下，然後 deploy 到 Firebase CDN 去 :p)
+npm run updateAndDeployToFirebase (抓最新活動、編檔案到 /public 下，然後 deploy 到我的 Firebase CDN 去 :p)
+
+or
 
 npm run dev (for 開發測試)
+
 ---
 活動來源是：KKTIX API、文化部 iCulture API (年代、寬宏、兩廳院、iNDIEVOX、Legacy、河岸留言、台北市文化快遞 等)。
