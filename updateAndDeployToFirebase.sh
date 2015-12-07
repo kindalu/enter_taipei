@@ -1,12 +1,13 @@
 cd src/app/eventData/kktix
-rm *.json
+rm -f *.json
 sh get.sh
 
 cd ../iCulture
-rm *.json
+rm -f *.json
 sh get.sh
 
 cd ../../../../
 rm -rf public
+npm run updateEvent
 npm run deploy
 firebase deploy
