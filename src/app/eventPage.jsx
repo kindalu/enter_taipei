@@ -94,7 +94,7 @@ class EventPage extends Component {
         </div>
 
         {/* Events */}
-        <div>
+        <div className={styles.eventContainer}>
           {displayEvents.map( event => {
             return (
               <Event 

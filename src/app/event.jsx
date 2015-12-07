@@ -16,7 +16,7 @@ class Event extends Component {
     return (
       <a href={event.url} target="_blank" >
         <div className={styles.event + ' ' + styles[categoryClass[event.category]] + ' ' + styles[dayClass[event.dayOfWeek]]}>
-          <div className={styles.centerAlign}>
+          <div className={styles.centerAlign+' '+styles.eventInner}>
             <span className={styles.time}>{event.chDay+' '+event.time}</span>
             <span className={styles.performer}>{event.category===5 ? event.performer:''}</span>
             <div className={styles.title}>{event.title}</div>
