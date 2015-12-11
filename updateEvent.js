@@ -67,19 +67,15 @@ let dayClass = {
   6: 'sat',
 }
 
-// from http://stackoverflow.com/questions/2848462/count-bytes-in-textarea-using-javascript
+// modified from http://stackoverflow.com/questions/2848462/count-bytes-in-textarea-using-javascript
 function getUTF8Length(string) {
-    var utf8length = 0;
-    for (var n = 0; n < string.length; n++) {
-        var c = string.charCodeAt(n);
+    let utf8length = 0;
+    for (let n = 0; n < string.length; n++) {
+        let c = string.charCodeAt(n);
         if (c < 128) {
-            utf8length++;
-        }
-        else if((c > 127) && (c < 2048)) {
-            utf8length = utf8length+2;
-        }
-        else {
-            utf8length = utf8length+3;
+            utf8length += 1.2;
+        } else {
+            utf8length += 2;
         }
     }
     return utf8length;
@@ -93,9 +89,9 @@ function zeroFilled(x){
   return ('00' + x).substr(-2);
 }
 function eventTrim(event){
-  while(getUTF8Length(event.title) > 90)
+  while(getUTF8Length(event.title) > 70)
     event.title = event.title.substr(0, event.title.length-2);
-  while(getUTF8Length(event.location) > 30)
+  while(getUTF8Length(event.location) > 26)
     event.location = event.location.substr(0, event.location.length-2);
   while(getUTF8Length(event.performer) > 22)
     event.performer = event.performer.substr(0, event.performer.length-2);
