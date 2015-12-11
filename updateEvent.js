@@ -185,7 +185,7 @@ for(let cat of iCultureCategoryTypes){
       let info = event.showInfo[0];
 
       //time
-      let eventTime = new Date(info.time);
+      let eventTime = new Date(info.time+"+08:00");
       if(eventTime.getTime() < now.getTime() || eventTime.getTime() > timeBound)
         return;
 
