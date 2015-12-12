@@ -120,7 +120,7 @@ let twoWeeksTimeBound = now.getTime() + two_weeks_in_millisecond;
 let timeBound = oneMonthTimeBound;
 
 // kktix
-let file = './src/app/eventData/kktix/events.json';
+let file = './src/eventData/kktix/events.json';
 let kktixEvents = jsonfile.readFileSync(file).entry;
 let kkCat = 20;
 
@@ -176,7 +176,7 @@ kktixEvents.forEach( event => {
 //iCulture
 let iCultureCategoryTypes=[1, 2, 3, 4, 5, 6, 7, 8, 11, 13, 14, 15, 17, 19];
 for(let cat of iCultureCategoryTypes){
-  let file = `./src/app/eventData/iCulture/${cat}.json`;
+  let file = `./src/eventData/iCulture/${cat}.json`;
   let iEvents = jsonfile.readFileSync(file);
   iEvents.forEach( event => {
     if(event.showInfo &&

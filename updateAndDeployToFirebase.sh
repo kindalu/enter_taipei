@@ -1,4 +1,4 @@
-cd src/app/eventData/kktix
+cd src/eventData/kktix
 rm -f *.json
 sh get.sh
 
@@ -6,7 +6,7 @@ cd ../iCulture
 rm -f *.json
 sh get.sh
 
-cd ../../../../
+cd ../../../
 rm -rf public
 npm run updateEvent
 npm run deploy
