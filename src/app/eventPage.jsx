@@ -73,7 +73,7 @@ class EventPage extends Component {
                       onClick={e => {
                         this.onCategoryToggle(cat);
                       }}>
-                      {categoryName[cat]}({categoryCount[cat]})
+                      {`${categoryName[cat]}(${categoryCount[cat]})`}
                     </div>
                   </div>
                 );
