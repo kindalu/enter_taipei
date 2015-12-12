@@ -6,6 +6,10 @@ cd ../iCulture
 rm -f *.json
 sh get.sh
 
+cd ../meetup
+rm -f *.json
+sh get.sh
+
 cd ../../../
 rm -rf public
 npm run updateEvent

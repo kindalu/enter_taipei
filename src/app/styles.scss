@@ -5,7 +5,7 @@
 .pageTitle {
   width: 100%;
   background-color: #2ca02c;
-  font-size: 1em;
+  font-size: 0.9em;
   position: relative;
   padding:0 0.3em;
   text-align: left;
@@ -33,12 +33,13 @@
 
 .category {
   display: inline-block;
-  vertical-align: middle;
   padding: 0.2em 0.2em;
   cursor: pointer;
   background-color: rgba(255,255,255,0.5);
   color: rgba(0,0,0,0.7);
   border: 1px solid black;  
+  font-size: 0.9em;
+  height: 2em;
 }
 
 .categoryOn {
@@ -195,7 +196,10 @@
 .kktix.event {
   background-color: #2ca02c;
 }
-
+.meetup.categoryOn,
+.meetup.event {
+  background-color: #AC9FE6;
+}
 //using d3 category20 color
 /*
 .mon .time {

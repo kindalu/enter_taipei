@@ -10,7 +10,7 @@ class EventPage extends Component {
 
   constructor(props, context){
     super(props, context);
-    for(let cat=0; cat<=20; cat++){
+    for(let cat=0; cat<=21; cat++){
       this.state.hideCategory[cat] = true;
     }
   }

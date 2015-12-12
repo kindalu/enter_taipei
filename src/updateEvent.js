@@ -19,7 +19,8 @@ let categoryName = {
   15:'其他',
   17:'演唱會',
   19:'研習課程',
-  20:'kk售票亭',
+  20:'KKTIX',
+  21:'Meetup',
 };
 let categoryClass = {
   1 : 'music',
@@ -37,6 +38,7 @@ let categoryClass = {
   17: 'concert',
   19: 'learning',
   20: 'kktix',
+  21: 'meetup',
   999: 'dayBlock',
 };
 
@@ -56,6 +58,7 @@ let categoryCount = {
   17:0,
   19:0,
   20:0,
+  21:0,
 };
 let dayClass = {
   0: 'sun',
@@ -234,12 +237,65 @@ for(let cat of iCultureCategoryTypes){
   });
 }
 
+// meetup
+// already using the filter to get events (in Taipei and within one month)
+file = './src/eventData/meetup/meetup.json';
+let meetupEvents = jsonfile.readFileSync(file).results;
+let meetupCat = 21;
+
+meetupEvents.forEach( event => {
+  //time
+  let eventTime = new Date(event.time);
+
+  let month = eventTime.getMonth()+1;
+  let date = eventTime.getDate();
+  let day = getChDay(eventTime.getDay());
+  let hours = zeroFilled(eventTime.getHours());
+  let minutes = zeroFilled(eventTime.getMinutes());
+  let chDay = `${month}月${date}日(${day})`
+  let time = `${hours}:${minutes}`;
+
+  if(eventTime.getTime() < now.getTime() || eventTime.getTime() > timeBound)
+    return;
+
+  //title
+  let title = event.name;
+
+  let location = '';
+  let address = '';
+  //location & address
+  if(event.hasOwnProperty("venue")){
+    location = event.venue.name;
+    address = event.venue.address_1;
+  }
+  let performer = event.group.name;
+
+  // url
+  let url = event.event_url;
+
+
+  allEvents.push(eventTrim({
+    ms:eventTime.getTime(),
+    chDay:chDay,
+    time:time,
+    title:title,
+    location:location,
+    dayOfWeek:eventTime.getDay(),
+    performer:performer,
+    url:url,
+    category:meetupCat,
+  }));
+
+  categoryCount[meetupCat]++;
+});
+
+
 allEvents.sort((a,b) => a.ms - b.ms);
 
 for(let cat in categoryCount){
   console.log(categoryName[cat] + ':' + categoryCount[cat]);
 }
-console.log(`${allEvents.length} events in next two weeks converted and sorted`);
+console.log(`${allEvents.length} events in next month converted and sorted`);
 
 let output = './src/app/allEvents.js';
 
