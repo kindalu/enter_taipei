@@ -5,24 +5,25 @@
 .pageTitle {
   width: 100%;
   background-color: #2ca02c;
-  font-size: 0.9em;
+  font-size: 16px;
   position: relative;
-  padding:0 0.3em;
+  padding:2px 4px;
   text-align: left;
   display:inline-block;
   color: black;
+  height: 27px;
 }
 
 .allCategories {
   width: 100%;
-  padding: 0;
+  padding: 2px 2px;
   background-color: black;
   text-align: left;
 
 }
 .catOuter{
-  margin: 0.2em 0.1em;
-  padding: 0.2em;
+  padding: 3px;
+  margin: 2px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -33,14 +34,14 @@
 
 .category {
   display: inline-block;
-  padding: 0.1em 0.2em 0 0.2em;
+  padding: 1px 4px;
   cursor: pointer;
   background-color: rgba(255,255,255,0.5);
   color: rgba(0,0,0,0.7);
   border: 1px solid black;  
-  font-size: 0.9em;
-  height: 1.9em;
-  line-height: 1.6em;
+  font-size: 16px;
+  height: 32px;
+  line-height: 30px;
 }
 
 .categoryOn {
