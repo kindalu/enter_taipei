@@ -263,30 +263,32 @@ meetupEvents.forEach( event => {
 
   let location = '';
   let address = '';
+  let isInTaipei = true;
   //location & address
   if(event.hasOwnProperty("venue")){
     location = event.venue.name;
     address = event.venue.address_1;
+    isInTaipei = !(address.indexOf('新北市') >= 0);
   }
   let performer = event.group.name;
 
   // url
   let url = event.event_url;
 
-
-  allEvents.push(eventTrim({
-    ms:eventTime.getTime(),
-    chDay:chDay,
-    time:time,
-    title:title,
-    location:location,
-    dayOfWeek:eventTime.getDay(),
-    performer:performer,
-    url:url,
-    category:meetupCat,
-  }));
-
-  categoryCount[meetupCat]++;
+  if(isInTaipei){
+    allEvents.push(eventTrim({
+      ms:eventTime.getTime(),
+      chDay:chDay,
+      time:time,
+      title:title,
+      location:location,
+      dayOfWeek:eventTime.getDay(),
+      performer:performer,
+      url:url,
+      category:meetupCat,
+    }));
+    categoryCount[meetupCat]++;
+  }
 });
 
 
