@@ -5,13 +5,12 @@
 .pageTitle {
   width: 100%;
   background-color: #2ca02c;
-  font-size: 16px;
+  font-size: 0.8em;
   position: relative;
-  padding:2px 4px;
+  padding: 2px 4px;
   text-align: left;
-  display:inline-block;
+  display: inline-block;
   color: black;
-  height: 27px;
 }
 
 .allCategories {
@@ -39,9 +38,8 @@
   background-color: rgba(255,255,255,0.5);
   color: rgba(0,0,0,0.7);
   border: 1px solid black;  
-  font-size: 16px;
-  height: 32px;
-  line-height: 30px;
+  font-size: 0.8em;
+  line-height: 1.5em;
 }
 
 .categoryOn {
