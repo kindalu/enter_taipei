@@ -15,5 +15,11 @@ or
 
 npm run dev (for 開發測試)
 
----
-活動來源是：KKTIX API、文化部 iCulture API (年代、寬宏、兩廳院、iNDIEVOX、Legacy、河岸留言、台北市文化快遞 等)。
+
+活動來源是：
+  * 文化部 iCulture API (年代、寬宏、兩廳院、iNDIEVOX、Legacy、河岸留言、台北市文化快遞 等)
+  * KKTIX API
+  * Meetup API
+
+
+License: MIT
