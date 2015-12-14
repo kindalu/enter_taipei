@@ -1,4 +1,4 @@
-# [enter_taipei](https://enter.taipei)
+# [enter.taipei](https://enter.taipei)
 A Project for Hackthon.Taipei 2015
 
 用極簡風的 UI 列出一個月內台北的活動，致敬今年被換掉的[舊小七ibon購票介面](http://www.ghfff.org.tw/images/ibon/ticket_step7.jpg )。
