@@ -7,13 +7,13 @@ A Project for Hackthon.Taipei 2015
 
 # 執行方法：
 
-npm install
+`npm install`
 
-npm run updateAndDeployToFirebase (抓最新活動、編檔案到 /public 下，然後 deploy 到我的 Firebase CDN 去 :p)
+`npm run updateAndDeployToFirebase` (抓最新活動、編檔案到 /public 下，然後 deploy 到我的 Firebase CDN 去 :p)
 
 or
 
-npm run dev (for 開發測試)
+`npm run dev` (for 開發測試)
 
 
 活動來源：
